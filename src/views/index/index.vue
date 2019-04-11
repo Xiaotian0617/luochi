@@ -134,7 +134,6 @@ export default {
 
                 let realData = res.data;
                 this.$set(this.list[index], 'data', realData)
-                debugger
                 // if (this.list[index].kData){
                 //     debugger
                 //     console.log(realData);

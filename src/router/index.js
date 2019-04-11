@@ -34,7 +34,12 @@ export const constantRouterMap = [{
         hidden: true,
         component: () => import ('@/views/404')
     },
-
+    {
+        path: '/dayReport',
+        roles: [],
+        hidden: true,
+        component: () => import ('@/views/index/dayReport')
+    },
     {
         path: '/',
         // component: Layout,
