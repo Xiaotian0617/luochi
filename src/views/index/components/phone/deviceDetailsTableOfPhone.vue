@@ -1,26 +1,31 @@
 <template>
   <div>
     <div v-for="item in data">
-      <table class="full-width detail-table">
+      <table class="full-width detail-table" :id="'a'+item.sort">
         <thead>
           <th colspan="2">
             {{item.sort}}.设备名称: {{item.equipmentName}}
             <span class="font-red">
               {{item.realTimeScore}}
-              <img :src="item.realTimeScore-item.startScore<0? down : up" class="di-item-ico-table">
+              <img
+                :src="item.realTimeScore-item.startScore<0? down : up"
+                class="di-item-ico-table"
+              >
             </span>
           </th>
         </thead>
         <tr>
           <td rowspan="6" class="d-img">
-            <img :src="'http://47.101.57.230/img/' + item.sort + '.jpg'" class>
+            <img :src="'http://pc.lebg.net/img/' + item.sort + '.jpg'" class>
           </td>
           <td class="table-td">
             <table class="full-width detail-table">
               <tr>
                 <td>
                   分数:
-                  <span :class="item.realTimeScore>60?'font-green':'font-red'">{{item.realTimeScore}}</span>
+                  <span
+                    :class="item.realTimeScore>60?'font-green':'font-red'"
+                  >{{item.realTimeScore}}</span>
                 </td>
               </tr>
               <tr>
@@ -41,15 +46,16 @@
                     温度:
                     <span class="font-red">{{item.temperature}}</span>
                   </span>
-                  <span style="float:right">
+                  <!-- <span style="float:right">
                     正常温度:
                     <span class="font-green">{{item.temperature}}</span>
-                  </span>
+                  </span>-->
                 </td>
               </tr>
               <tr>
                 <td style="background-color:yellow">
-                  <span>问题建议: {{item.problem}}</span>
+                  <span>问题建议:</span>
+                  <span v-for="(pro,key) in item.problem">{{key+1}}.{{pro}}.</span>
                 </td>
               </tr>
             </table>
@@ -66,13 +72,16 @@ import down from "static/img/down.png";
 export default {
   props: ["data"],
   data() {
-      return {
-          up, down
-      }
+    return {
+      up,
+      down
+    };
   }
 };
 </script>
 
 <style scope>
-.di-item-ico-table{width: 10px;}
+.di-item-ico-table {
+  width: 10px;
+}
 </style>

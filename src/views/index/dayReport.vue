@@ -17,16 +17,16 @@
     </div>
     <div>
       <b>设备列表</b>
-      <device-table-of-phone :data="warningList"></device-table-of-phone>
+      <device-table-of-phone :data="devices.warningList"></device-table-of-phone>
     </div>
-    <device-details-table-of-phone :data="warningList"></device-details-table-of-phone>
+    <device-details-table-of-phone :data="devices.warningList"></device-details-table-of-phone>
   </div>
 </template>
 
 <script>
-import dataTableOfPhone from './components/phone/dataTableOfPhone'
-import deviceTableOfPhone from './components/phone/deviceTableOfPhone'
-import deviceDetailsTableOfPhone from './components/phone/deviceDetailsTableOfPhone'
+import dataTableOfPhone from "./components/phone/dataTableOfPhone";
+import deviceTableOfPhone from "./components/phone/deviceTableOfPhone";
+import deviceDetailsTableOfPhone from "./components/phone/deviceDetailsTableOfPhone";
 
 import { formatDate } from "@/utils";
 
@@ -55,7 +55,9 @@ export default {
     };
   },
   components: {
-    dataTableOfPhone,deviceTableOfPhone,deviceDetailsTableOfPhone
+    dataTableOfPhone,
+    deviceTableOfPhone,
+    deviceDetailsTableOfPhone
   },
   watch: {
     $route(val) {
@@ -85,22 +87,27 @@ export default {
     getProlineRealtime(proLineId) {
       let ops = {
         proLineId: proLineId,
-        isAll: false
+        isAll: true
       };
       APIGetProlineRealtime(ops).then(
         res => {
           this.devices.data = res.data;
           let arr = res.data.warningList;
           arr.sort((a, b) => {
-              return a.sort - b.sort;
-          })
-          arr.forEach((item, index, arr) =>{
-            arr[index].percent = (((item.realTimeScore - item.startScore)/item.startScore) * 100).toFixed(0)
-            arr[index].beltlineName = this.beltlineName
-          })
-          console.log(arr)
-          this.warningList = arr
-
+            return a.sort - b.sort;
+          });
+          arr.forEach((item, index, arr) => {
+            if (item.realTimeScore != 0 && item.startScore != 0) {
+              arr[index].percent = (
+                ((item.realTimeScore - item.startScore) / item.startScore) *
+                100
+              ).toFixed(0);
+            } else {
+              arr[index].percent = 0;
+            }
+            arr[index].beltlineName = this.beltlineName;
+          });
+          this.devices.warningList = arr;
         },
         () => {
           this.devices.data = null;

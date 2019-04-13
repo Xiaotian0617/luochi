@@ -24,111 +24,111 @@ import LayoutLuochi from '../views/layoutLuochi/Layout'
 **/
 
 export const constantRouterMap = [{
-        path: '/login',
-        roles: [],
-        hidden: true,
-        component: () => import ('@/views/login/index')
-    }, {
-        path: '/404',
-        roles: [],
-        hidden: true,
-        component: () => import ('@/views/404')
-    },
-    {
-        path: '/dayReport',
-        roles: [],
-        hidden: true,
-        component: () => import ('@/views/index/dayReport')
-    },
-    {
-        path: '/',
-        // component: Layout,
-        // redirect: '/home',
-        component: LayoutLuochi,
-        redirect: '/index/index',
-        name: '首页',
-        roles: [],
-        hidden: true,
-        children: [{
-            path: 'home',
-            component: () => import ('@/views/index/index')
-        }]
-    },
+    path: '/login',
+    roles: [],
+    hidden: true,
+    component: () => import('@/views/login/index')
+}, {
+    path: '/404',
+    roles: [],
+    hidden: true,
+    component: () => import('@/views/404')
+},
+{
+    path: '/dayReport',
+    roles: [],
+    hidden: true,
+    component: () => import('@/views/index/dayReport')
+},
+{
+    path: '/',
+    // component: Layout,
+    // redirect: '/home',
+    component: LayoutLuochi,
+    redirect: '/index/index',
+    name: '首页',
+    roles: [],
+    hidden: true,
+    children: [{
+        path: 'home',
+        component: () => import('@/views/index/index')
+    }]
+},
 
-    {
-        path: '/index',
-        // component: Layout,
-        component: LayoutLuochi,
-        redirect: '/index/index',
-        name: '综合评估',
-        roles: ['superAdmin', 'admin'],
-        meta: {
-            title: '综合评估',
-            icon: 'example'
+{
+    path: '/index',
+    // component: Layout,
+    component: LayoutLuochi,
+    redirect: '/index/index',
+    name: '综合评估',
+    roles: ['superAdmin', 'admin'],
+    meta: {
+        title: '综合评估',
+        icon: 'example'
+    },
+    hidden: true,
+    children: [
+        {
+            path: 'index',
+            // name: '综合评估',
+            meta: {
+                title: '综合评估',
+                icon: 'example'
+            },
+            component: () => import('@/views/index/index')
         },
-        hidden: true,
-        children: [
-            {
-                path: 'index',
-                // name: '综合评估',
-                meta: {
-                    title: '综合评估',
-                    icon: 'example'
-                },
-                component: () => import ('@/views/index/index')
+        {
+            path: 'details',
+            name: '评分概览',
+            meta: {
+                title: '评分概览',
+                icon: 'qun'
             },
-            {
-                path: 'details',
-                name: '评分概览',
-                meta: {
-                    title: '评分概览',
-                    icon: 'qun'
-                },
-                hidden: true,
-                component: () => import ('@/views/index/details')
+            hidden: true,
+            component: () => import('@/views/index/details')
+        },
+        {
+            path: 'detail',
+            name: '评分详情',
+            meta: {
+                title: '评分详情',
+                icon: 'qun'
             },
-            {
-                path: 'detail',
-                name: '评分详情',
-                meta: {
-                    title: '评分详情',
-                    icon: 'qun'
-                },
-                hidden: true,
-                component: () => import ('@/views/index/detail')
+            hidden: true,
+            component: () => import('@/views/index/detail')
+        },
+        {
+            path: 'realtimeScore',
+            name: '设备实时分值',
+            meta: {
+                title: '设备实时分值',
+                icon: 'qun'
             },
-            {
-                path: 'realtimeScore',
-                name: '设备实时分值',
-                meta: {
-                    title: '设备实时分值',
-                    icon: 'qun'
-                },
-                hidden: true,
-                component: () => import ('@/views/index/realtimeScore')
+            hidden: true,
+            component: () => import('@/views/index/realtimeScore')
+        },
+        {
+            path: 'pngDetail',
+            name: '第三级页面',
+            meta: {
+                title: '设备详情',
+                icon: 'qun'
             },
-            {
-                path: 'pngDetail',
-                name: '第三级页面',
-                meta: {
-                    title: '设备详情',
-                    icon: 'qun'
-                },
-                hidden: true,
-                component: () => import ('@/views/index/pngDetail')
-            }
-            
-        ]
-    },
+            hidden: true,
+            component: () => import('@/views/index/pngDetail')
+        }
 
- 
+    ]
+},
 
-    {
-        path: '*',
-        roles: [],
-        redirect: '/404',
-        hidden: true
-    }
+
+
+{
+    path: '*',
+    roles: [],
+    redirect: '/404',
+    hidden: true
+}
 ]
 
 export default new Router({
